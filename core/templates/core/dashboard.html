@@ -1,0 +1,114 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h2 class="mb-4">Welcome, {{ user.first_name|default:user.username }} 👋</h2>
+
+<div class="grid-container">
+
+  <!-- Assignments -->
+  <div class="card">
+    <h5>📘 Assignments</h5>
+    {% for task in upcoming_tasks %}
+      <p>{{ task.title }} – <small>{{ task.due_date }}</small></p>
+    {% empty %}
+      <p>No tasks available.</p>
+    {% endfor %}
+    <a href="{% url 'create_task' %}" class="btn btn-outline-primary btn-sm mt-2">+ Add Task</a>
+  </div>
+
+  <!-- Study Reminders -->
+  <div class="card">
+    <h5>⏰ Study Reminders</h5>
+    {% for reminder in reminders %}
+      <p>{{ reminder.title }} – {{ reminder.reminder_time }}</p>
+    {% empty %}
+      <p>No reminders set.</p>
+    {% endfor %}
+    <a href="{% url 'add_reminder' %}" class="btn btn-outline-secondary btn-sm mt-2">+ Add Reminder</a>
+  </div>
+
+  <!-- Wellness Check-ins -->
+  <div class="card">
+    <h5>😊 Wellness Check-ins</h5>
+    <p>Latest Mood: {{ latest_mood|default:"Not checked in" }}</p>
+    <a href="{% url 'checkin_wellness' %}" class="btn btn-outline-success btn-sm mt-2">+ Check-In</a>
+  </div>
+
+  <!-- Calendar -->
+  <div class="card">
+    <h5>📅 Calendar</h5>
+    <p>Today's date: {{ today }}</p>
+    <a href="{% url 'calendar' %}" class="btn btn-outline-info btn-sm">View Full Calendar</a>
+  </div>
+
+  <!-- Task Completion Chart -->
+  <div class="card">
+    <h5>📈 Task Completion</h5>
+    <canvas id="taskChart" width="300" height="300"></canvas>
+  </div>
+
+  <!-- Weekly Mood Chart -->
+  <div class="card">
+    <h5>📊 Weekly Mood</h5>
+    <canvas id="moodChart" width="300" height="300"></canvas>
+  </div>
+
+</div>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Charts Script -->
+<script>
+  // Task Completion Pie Chart
+  const taskCtx = document.getElementById('taskChart').getContext('2d');
+  new Chart(taskCtx, {
+    type: 'pie',
+    data: {
+      labels: ['Completed', 'Pending'],
+      datasets: [{
+        label: 'Tasks',
+        data: [{{ completed_tasks }}, {{ total_tasks|add:"-completed_tasks" }}],
+        backgroundColor: ['#4caf50', '#ff5252']  // ✅ Green for done, red for pending
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom'
+        }
+      }
+    }
+  });
+
+  // Weekly Mood Bar Chart
+  const moodCtx = document.getElementById('moodChart').getContext('2d');
+  new Chart(moodCtx, {
+    type: 'bar',
+    data: {
+      labels: {{ wellness_labels|safe }},
+      datasets: [{
+        label: 'Mood Trend',
+        data: {{ wellness_values|safe }},
+        backgroundColor: '#2196f3'
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 5
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
+    }
+  });
+</script>
+{% endblock %}
+

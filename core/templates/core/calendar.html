@@ -1,0 +1,37 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h2>📅 Task Calendar</h2>
+<p><a href="{% url 'calendar' %}">📅 View Calendar</a></p>
+
+
+<p><strong>Today's date:</strong> {{ today }}</p>
+
+<table border="1" cellpadding="8" cellspacing="0">
+  <tr style="background-color: #f0f0f0;">
+    <th>Task</th>
+    <th>Due Date</th>
+    <th>Status</th>
+  </tr>
+  {% for task in tasks %}
+  <tr>
+    <td>{{ task.title }}</td>
+    <td>{{ task.due_date }}</td>
+    <td>
+      {% if task.completed %}
+        ✅ Completed
+      {% else %}
+        ⏳ In Progress
+      {% endif %}
+    </td>
+  </tr>
+  {% empty %}
+  <tr>
+    <td colspan="3">No tasks with due dates found.</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<br>
+<a href="{% url 'dashboard' %}">⬅ Back to Dashboard</a>
+{% endblock %}

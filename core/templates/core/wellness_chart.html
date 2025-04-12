@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+  <h2>📈 Wellness Trend</h2>
+  <canvas id="wellnessChart" width="400" height="200"></canvas>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('wellnessChart').getContext('2d');
+    const wellnessChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: {{ dates|safe }},
+        datasets: [{
+          label: 'Wellness Level',
+          data: {{ levels|safe }},
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.3,
+          fill: false
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 10
+          }
+        }
+      }
+    });
+  </script>
+{% endblock %}

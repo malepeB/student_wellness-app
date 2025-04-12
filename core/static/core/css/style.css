@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f0f8ff;
+}
+
+.navbar {
+    background-color: #3f51b5;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000; /* Ensures it's above other content */
+      }
+
+
+.dashboard-container {
+    padding: 20px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    align-items: stretch;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Make chart canvas responsive and equal height */
+canvas {
+    width: 100% !important;
+    max-height: 200px !important;
+    height: auto;
+}
+.auth-bg {
+    background: #f0f8ff;
+  }
+  
+  .auth-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+  }
+  
+  .auth-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+  }
+  
+  .auth-card h2 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+
+

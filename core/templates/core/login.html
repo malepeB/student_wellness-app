@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Student Wellness</title>
+  <link rel="stylesheet" href="{% static 'core/css/login.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="login-container">
+    <div class="left-panel">
+      <img src="{% static 'core/assets/login-image.png' %}" alt="login illustration">
+    </div>
+    <div class="right-panel">
+      <h2>Welcome Back 👋</h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <div class="input-group">
+          <label for="id_username">Username</label>
+          {{ form.username }}
+        </div>
+
+        <div class="input-group">
+          <label for="id_password">Password</label>
+          <div class="password-wrapper">
+            {{ form.password }}
+            <i class="fa-solid fa-eye toggle-password"></i>
+          </div>
+        </div>
+
+        <button type="submit" class="btn">Login</button>
+        <p>Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const toggle = document.querySelector('.toggle-password');
+    const passwordInput = document.getElementById('id_password');
+    toggle.addEventListener('click', () => {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      toggle.classList.toggle('fa-eye-slash');
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

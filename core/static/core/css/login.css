@@ -1,0 +1,88 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f0f4ff;
+  }
+  
+  .login-container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .left-panel {
+    flex: 1;
+    background-color: #e6f0ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .left-panel img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .right-panel {
+    flex: 1;
+    background: white;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  form {
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .input-group {
+    margin-bottom: 20px;
+  }
+  
+  .input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  .password-wrapper {
+    position: relative;
+  }
+  
+  .password-wrapper i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  
+  .btn {
+    background: #3f51b5;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+  }
+  
+  .btn:hover {
+    background: #32408f;
+  }
+  
+  a {
+    color: #3f51b5;
+    text-decoration: none;
+  }
+  

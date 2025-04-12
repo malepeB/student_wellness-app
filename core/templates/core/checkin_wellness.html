@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="container mt-4">
+  <h3>Wellness Check-In</h3>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label>Mood:</label>
+      {{ form.mood }}
+    </div>
+    <div class="mb-3">
+      <label>Journal Entry:</label>
+      {{ form.journal_entry }}
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+  </form>
+</div>
+{% endblock %}
